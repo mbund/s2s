@@ -170,6 +170,7 @@ fn serializeRecursive(stream: anytype, comptime T: type, value: T) @TypeOf(strea
         .Frame,
         .AnyFrame,
         .EnumLiteral,
+        .BoundFn,
         => unreachable,
     }
 }
@@ -339,6 +340,7 @@ fn recursiveDeserialize(stream: anytype, comptime T: type, allocator: ?std.mem.A
         .Frame,
         .AnyFrame,
         .EnumLiteral,
+        .BoundFn,
         => unreachable,
     }
 }
@@ -436,6 +438,7 @@ fn recursiveFree(allocator: std.mem.Allocator, comptime T: type, value: *T) void
         .Frame,
         .AnyFrame,
         .EnumLiteral,
+        .BoundFn,
         => unreachable,
     }
 }
@@ -635,6 +638,7 @@ fn computeTypeHashInternal(hasher: *TypeHashFn, comptime T: type) void {
         .Frame,
         .AnyFrame,
         .EnumLiteral,
+        .BoundFn,
         => @compileError("Unsupported type " ++ @typeName(T)),
     }
 }
